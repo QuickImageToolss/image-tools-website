@@ -3,248 +3,636 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quick Image Tools - Free Online Image Editor</title>
-<meta name="description" content="Free online image compressor, resizer, converter and cropper. Easily optimize your images.">
+
+<title>Quick Image Tools - Free Online Image Tools</title>
+
+<meta name="description" content="Free online image tools to compress, resize, crop and convert images. Fast, easy and secure image processing.">
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
-header{background:#173b75;color:white;padding:25px 15px;text-align:center}
-header h1{margin:0;font-size:27px}
-header p{color:#dce8ff}
-.container{max-width:900px;margin:25px auto;padding:15px}
-.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-button,.tool{
-border:0;border-radius:9px;padding:13px;
-background:#fff;color:#173b75;
-font-weight:bold;cursor:pointer;
-box-shadow:0 2px 8px #00000012
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-button.active,.primary{background:#1764d2;color:white}
-.panel{background:white;margin-top:20px;padding:22px;border-radius:13px;box-shadow:0 3px 15px #00000010}
-input,select{width:100%;padding:12px;margin:10px 0;border:1px solid #ccd3df;border-radius:7px}
-label{font-weight:bold}
-.primary{width:100%;margin-top:15px}
-#preview{max-width:100%;max-height:300px;display:block;margin:15px auto}
-#status{text-align:center;color:#1764d2;margin-top:15px}
-footer{text-align:center;padding:25px;color:#657086}
-@media(max-width:500px){.tools{grid-template-columns:repeat(2,1fr)}}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fc;
+    color:#202b3c;
+}
+
+header{
+    background:#ffffff;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    margin-left:20px;
+    font-size:15px;
+}
+
+.hero{
+    text-align:center;
+    padding:75px 20px 55px;
+    background:linear-gradient(135deg,#2563eb,#6d5dfc);
+    color:white;
+}
+
+.hero h1{
+    font-size:38px;
+    margin-bottom:18px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.7;
+    max-width:650px;
+    margin:auto;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:45px 20px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.section-desc{
+    text-align:center;
+    color:#667085;
+    margin-bottom:35px;
+}
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:22px;
+}
+
+.tool-card{
+    background:white;
+    padding:28px 22px;
+    border-radius:14px;
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
+    transition:.2s;
+    cursor:pointer;
+    border:1px solid #edf0f5;
+}
+
+.tool-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 25px rgba(0,0,0,.10);
+}
+
+.tool-icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.tool-card h3{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.tool-card p{
+    color:#667085;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.tool-card button{
+    margin-top:18px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:11px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+#editor{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:14px;
+    margin-top:35px;
+    box-shadow:0 4px 20px rgba(0,0,0,.07);
+}
+
+#editor h2{
+    margin-bottom:20px;
+}
+
+input,select{
+    padding:12px;
+    border:1px solid #d5dbe5;
+    border-radius:7px;
+    margin:8px 5px 8px 0;
+    max-width:100%;
+}
+
+.action-btn{
+    padding:12px 20px;
+    border:none;
+    border-radius:7px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.close-btn{
+    background:#64748b;
+}
+
+#preview{
+    max-width:100%;
+    max-height:350px;
+    display:block;
+    margin:20px auto;
+    border-radius:8px;
+}
+
+#download{
+    display:none;
+    background:#16a34a;
+    color:white;
+    padding:12px 20px;
+    border-radius:7px;
+    text-decoration:none;
+    margin-top:15px;
+    display:none;
+}
+
+#message{
+    margin-top:15px;
+    color:#15803d;
+    font-weight:bold;
+}
+
+.about{
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    line-height:1.8;
+    margin-top:35px;
+}
+
+footer{
+    background:#172033;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:45px;
+}
+
+footer a{
+    color:#cbd5e1;
+    text-decoration:none;
+    margin:0 8px;
+    font-size:14px;
+}
+
+footer p{
+    margin-top:15px;
+    font-size:13px;
+    color:#cbd5e1;
+}
+
+@media(max-width:600px){
+    header{
+        justify-content:center;
+    }
+
+    nav{
+        text-align:center;
+    }
+
+    nav a{
+        margin:0 7px;
+        font-size:13px;
+    }
+
+    .hero h1{
+        font-size:29px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .section-title{
+        font-size:24px;
+    }
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>Quick Image Tools</h1>
-<p>Free Online Image Compressor, Resizer & Converter</p>
+    <div class="logo">Quick Image Tools</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#tools">Image Tools</a>
+        <a href="#about">About Us</a>
+    </nav>
 </header>
 
-<div class="container">
+<section class="hero">
+    <h1>Free Online Image Tools</h1>
 
-<h2>Choose Your Image Tool</h2>
+    <p>
+        Compress, resize, crop and convert your images
+        quickly and easily. No software installation required.
+    </p>
+</section>
 
-<div class="tools">
-<button onclick="setTool('compress')" class="active">Image Compressor</button>
-<button onclick="setTool('resize')">Image Resizer</button>
-<button onclick="setTool('jpgpng')">JPG to PNG</button>
-<button onclick="setTool('pngjpg')">PNG to JPG</button>
-<button onclick="setTool('crop')">Image Cropper</button>
-<button onclick="setTool('convert')">Image Converter</button>
+<main class="container">
+
+<section id="tools">
+
+<h2 class="section-title">Our Image Tools</h2>
+
+<p class="section-desc">
+Choose an image tool and get started for free.
+</p>
+
+<div class="tools-grid">
+
+<div class="tool-card" onclick="setTool('compress')">
+    <div class="tool-icon">🗜️</div>
+    <h3>Image Compressor</h3>
+    <p>Reduce image file size while maintaining good visual quality.</p>
+    <button>Use Tool</button>
 </div>
 
-<div class="panel">
-
-<h2 id="toolTitle">Image Compressor</h2>
-
-<label>Select Your Image</label>
-<input type="file" id="file" accept="image/*">
-
-<img id="preview" hidden>
-
-<div id="options">
-
-<label>Image Quality (%)</label>
-<input type="number" id="quality" value="80" min="10" max="100">
-
+<div class="tool-card" onclick="setTool('resize')">
+    <div class="tool-icon">📐</div>
+    <h3>Image Resizer</h3>
+    <p>Change image width and height to your preferred dimensions.</p>
+    <button>Use Tool</button>
 </div>
 
-<button class="primary" onclick="processImage()">Process Image</button>
+<div class="tool-card" onclick="setTool('jpgpng')">
+    <div class="tool-icon">🖼️</div>
+    <h3>JPG to PNG</h3>
+    <p>Convert your JPG images into PNG format easily.</p>
+    <button>Use Tool</button>
+</div>
 
-<p id="status"></p>
+<div class="tool-card" onclick="setTool('pngjpg')">
+    <div class="tool-icon">📁</div>
+    <h3>PNG to JPG</h3>
+    <p>Convert PNG images into JPG format.</p>
+    <button>Use Tool</button>
+</div>
 
-<a id="download" hidden>
-<button class="primary">Download Image</button>
+<div class="tool-card" onclick="setTool('crop')">
+    <div class="tool-icon">✂️</div>
+    <h3>Image Cropper</h3>
+    <p>Crop unwanted parts of your images.</p>
+    <button>Use Tool</button>
+</div>
+
+<div class="tool-card" onclick="setTool('convert')">
+    <div class="tool-icon">🔄</div>
+    <h3>Image Converter</h3>
+    <p>Convert images between JPG, PNG and WEBP formats.</p>
+    <button>Use Tool</button>
+</div>
+
+</div>
+</section>
+
+<section id="editor">
+
+<h2 id="toolTitle">Image Tool</h2>
+
+<input type="file" id="fileInput" accept="image/*">
+
+<div id="options"></div>
+
+<img id="preview" alt="Image preview">
+
+<button class="action-btn" onclick="processImage()">
+    Process Image
+</button>
+
+<button class="action-btn close-btn" onclick="closeEditor()">
+    Close Tool
+</button>
+
+<br>
+
+<a id="download" download="processed-image.jpg">
+    Download Image
 </a>
 
-</div>
+<p id="message"></p>
 
-</div>
+</section>
+
+<section class="about" id="about">
+
+<h2>About Quick Image Tools</h2>
+
+<p>
+Quick Image Tools provides free and easy-to-use online image
+processing tools. You can compress, resize, crop and convert
+images directly in your browser.
+</p>
+
+<p>
+Our goal is to make image editing simple, fast and accessible
+for everyone. Your selected images are processed in your browser
+and are not uploaded to our server.
+</p>
+
+</section>
+
+</main>
 
 <footer>
+
+<div>
+    <a href="#">Home</a>
+    <a href="#tools">Image Tools</a>
+    <a href="#about">About Us</a>
+</div>
+
 <p>© 2026 Quick Image Tools. All Rights Reserved.</p>
-<p>Your images are processed in your browser.</p>
+
 </footer>
 
 <script>
-let tool='compress';
-let image=new Image();
-let selectedFile=null;
 
-const file=document.getElementById('file');
-const preview=document.getElementById('preview');
-const options=document.getElementById('options');
+let currentTool = "";
+let selectedFile = null;
+let image = new Image();
+let downloadURL = null;
 
-const titles={
-compress:'Image Compressor',
-resize:'Image Resizer',
-jpgpng:'JPG to PNG Converter',
-pngjpg:'PNG to JPG Converter',
-crop:'Image Cropper',
-convert:'Image Converter'
-};
+const fileInput = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
+const options = document.getElementById("options");
+const editor = document.getElementById("editor");
+const message = document.getElementById("message");
+const download = document.getElementById("download");
 
-function setTool(name){
-tool=name;
-document.getElementById('toolTitle').textContent=titles[name];
+function setTool(tool){
 
-document.querySelectorAll('.tools button').forEach(b=>{
-b.classList.remove('active');
-});
-event.currentTarget.classList.add('active');
+    currentTool = tool;
+    editor.style.display = "block";
+    editor.scrollIntoView({behavior:"smooth"});
 
-if(name==='compress'){
-options.innerHTML=`
-<label>Image Quality (%)</label>
-<input type="number" id="quality" value="80" min="10" max="100">`;
+    document.getElementById("toolTitle").textContent =
+    {
+        compress:"Image Compressor",
+        resize:"Image Resizer",
+        jpgpng:"JPG to PNG",
+        pngjpg:"PNG to JPG",
+        crop:"Image Cropper",
+        convert:"Image Converter"
+    }[tool];
+
+    options.innerHTML = "";
+
+    if(tool === "compress"){
+        options.innerHTML = `
+        <label>Image Quality:</label>
+        <select id="quality">
+            <option value="0.9">High Quality</option>
+            <option value="0.8" selected>Good Quality</option>
+            <option value="0.6">Medium Quality</option>
+            <option value="0.4">Smaller File</option>
+        </select>`;
+    }
+
+    if(tool === "resize"){
+        options.innerHTML = `
+        <input type="number" id="width" placeholder="Width (px)">
+        <input type="number" id="height" placeholder="Height (px)">`;
+    }
+
+    if(tool === "crop"){
+        options.innerHTML = `
+        <p>Enter crop values as percentages.</p>
+        <input type="number" id="x" placeholder="Left %" value="0">
+        <input type="number" id="y" placeholder="Top %" value="0">
+        <input type="number" id="w" placeholder="Width %" value="80">
+        <input type="number" id="h" placeholder="Height %" value="80">`;
+    }
+
+    if(tool === "convert"){
+        options.innerHTML = `
+        <label>Output Format:</label>
+        <select id="format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+        </select>`;
+    }
+
+    preview.style.display = "none";
+    download.style.display = "none";
+    message.textContent = "";
+    fileInput.value = "";
+    selectedFile = null;
 }
 
-if(name==='resize'){
-options.innerHTML=`
-<label>Width (pixels)</label>
-<input type="number" id="width" value="800">
-<label>Height (pixels)</label>
-<input type="number" id="height" value="600">`;
-}
+fileInput.addEventListener("change",function(){
 
-if(name==='crop'){
-options.innerHTML=`
-<label>Crop X (%)</label><input id="x" type="number" value="0">
-<label>Crop Y (%)</label><input id="y" type="number" value="0">
-<label>Crop Width (%)</label><input id="width" type="number" value="80">
-<label>Crop Height (%)</label><input id="height" type="number" value="80">`;
-}
+    selectedFile = this.files[0];
 
-if(name==='convert'){
-options.innerHTML=`
-<label>Choose Output Format</label>
-<select id="format">
-<option value="image/jpeg">JPG</option>
-<option value="image/png">PNG</option>
-<option value="image/webp">WEBP</option>
-</select>`;
-}
+    if(!selectedFile) return;
 
-if(name==='jpgpng'||name==='pngjpg'){
-options.innerHTML='<p>Choose an image and convert it to the required format.</p>';
-}
+    if(!selectedFile.type.startsWith("image/")){
+        message.textContent = "Please select a valid image.";
+        return;
+    }
 
-document.getElementById('status').textContent='';
-document.getElementById('download').hidden=true;
-}
+    const reader = new FileReader();
 
-file.addEventListener('change',()=>{
-selectedFile=file.files[0];
-if(!selectedFile)return;
+    reader.onload = function(e){
 
-const url=URL.createObjectURL(selectedFile);
-image.onload=()=>{
-preview.src=url;
-preview.hidden=false;
-};
-image.src=url;
-document.getElementById('status').textContent='Image selected successfully!';
+        image.onload = function(){
+
+            preview.src = e.target.result;
+            preview.style.display = "block";
+
+            if(currentTool === "resize"){
+                document.getElementById("width").value = image.naturalWidth;
+                document.getElementById("height").value = image.naturalHeight;
+            }
+        };
+
+        image.src = e.target.result;
+    };
+
+    reader.readAsDataURL(selectedFile);
 });
 
 function processImage(){
-if(!selectedFile||!image.naturalWidth){
-alert('Please select an image first.');
-return;
+
+    if(!selectedFile || !image.src){
+        message.textContent = "Please select an image first.";
+        return;
+    }
+
+    let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext("2d");
+
+    let width = image.naturalWidth;
+    let height = image.naturalHeight;
+
+    let outputType = "image/jpeg";
+    let quality = 0.8;
+
+    if(currentTool === "compress"){
+
+        quality = Number(document.getElementById("quality").value);
+        canvas.width = width;
+        canvas.height = height;
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0,0,width,height);
+        ctx.drawImage(image,0,0);
+    }
+
+    else if(currentTool === "resize"){
+
+        width = Number(document.getElementById("width").value);
+        height = Number(document.getElementById("height").value);
+
+        if(width < 1 || height < 1){
+            message.textContent = "Enter valid dimensions.";
+            return;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(image,0,0,width,height);
+    }
+
+    else if(currentTool === "jpgpng"){
+
+        outputType = "image/png";
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(image,0,0);
+    }
+
+    else if(currentTool === "pngjpg"){
+
+        outputType = "image/jpeg";
+        canvas.width = width;
+        canvas.height = height;
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0,0,width,height);
+        ctx.drawImage(image,0,0);
+    }
+
+    else if(currentTool === "crop"){
+
+        let x = Number(document.getElementById("x").value);
+        let y = Number(document.getElementById("y").value);
+        let w = Number(document.getElementById("w").value);
+        let h = Number(document.getElementById("h").value);
+
+        if(x < 0 || y < 0 || w <= 0 || h <= 0 ||
+           x + w > 100 || y + h > 100){
+            message.textContent = "Enter valid crop percentages.";
+            return;
+        }
+
+        let sx = Math.floor(width*x/100);
+        let sy = Math.floor(height*y/100);
+        let sw = Math.floor(width*w/100);
+        let sh = Math.floor(height*h/100);
+
+        canvas.width = sw;
+        canvas.height = sh;
+
+        ctx.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);
+    }
+
+    else if(currentTool === "convert"){
+
+        outputType = document.getElementById("format").value;
+
+        canvas.width = width;
+        canvas.height = height;
+
+        if(outputType === "image/jpeg"){
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0,0,width,height);
+        }
+
+        ctx.drawImage(image,0,0);
+    }
+
+    let extension = {
+        "image/jpeg":"jpg",
+        "image/png":"png",
+        "image/webp":"webp"
+    }[outputType];
+
+    canvas.toBlob(function(blob){
+
+        if(!blob){
+            message.textContent = "Image processing failed. Try another image.";
+            return;
+        }
+
+        if(downloadURL){
+            URL.revokeObjectURL(downloadURL);
+        }
+
+        downloadURL = URL.createObjectURL(blob);
+
+        download.href = downloadURL;
+        download.download = "quick-image-tools." + extension;
+        download.style.display = "inline-block";
+
+        message.textContent =
+        "Image processed successfully! File size: " +
+        (blob.size/1024).toFixed(2) + " KB";
+
+    },outputType,quality);
 }
 
-const canvas=document.createElement('canvas');
-const ctx=canvas.getContext('2d');
+function closeEditor(){
 
-let w=image.naturalWidth;
-let h=image.naturalHeight;
-let format='image/jpeg';
-let quality=.85;
-
-if(tool==='resize'){
-w=Number(document.getElementById('width').value);
-h=Number(document.getElementById('height').value);
-if(!w||!h||w<1||h<1||w>10000||h>10000){
-alert('Enter valid dimensions (1-10000).');
-return;
-}
+    editor.style.display = "none";
+    options.innerHTML = "";
+    preview.style.display = "none";
+    download.style.display = "none";
+    message.textContent = "";
+    fileInput.value = "";
+    selectedFile = null;
 }
 
-if(tool==='compress'){
-quality=Number(document.getElementById('quality').value)/100;
-if(quality<.1||quality>1){
-alert('Quality must be between 10 and 100.');
-return;
-}
-}
-
-if(tool==='jpgpng')format='image/png';
-if(tool==='pngjpg')format='image/jpeg';
-
-if(tool==='convert'){
-format=document.getElementById('format').value;
-}
-
-if(tool==='crop'){
-const x=Number(document.getElementById('x').value);
-const y=Number(document.getElementById('y').value);
-const cw=Number(document.getElementById('width').value);
-const ch=Number(document.getElementById('height').value);
-
-if(x<0||y<0||cw<=0||ch<=0||x+cw>100||y+ch>100){
-alert('Enter valid crop percentages.');
-return;
-}
-
-const sx=Math.round(w*x/100);
-const sy=Math.round(h*y/100);
-const sw=Math.round(w*cw/100);
-const sh=Math.round(h*ch/100);
-
-canvas.width=sw;
-canvas.height=sh;
-ctx.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);
-}else{
-canvas.width=w;
-canvas.height=h;
-ctx.drawImage(image,0,0,w,h);
-}
-
-canvas.toBlob(blob=>{
-if(!blob){
-alert('Conversion failed. Try another image.');
-return;
-}
-
-const url=URL.createObjectURL(blob);
-const link=document.getElementById('download');
-link.href=url;
-link.download='quick-image-tools.'+
-(format==='image/png'?'png':
-format==='image/webp'?'webp':'jpg');
-link.hidden=false;
-
-document.getElementById('status').textContent=
-'Your image is ready! Click Download Image.';
-},format,quality);
-}
 </script>
 
 </body>
-  </html>
+</html> 
