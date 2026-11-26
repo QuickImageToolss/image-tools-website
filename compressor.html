@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Image Compressor Online | Quick Image Tools</title>
+
+<meta name="description" content="Compress images online for free. Reduce JPG, PNG and WEBP image file sizes easily with Quick Image Tools.">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fc;
+    color: #202b3c;
+}
+
+header {
+    background: white;
+    padding: 18px 7%;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 750px;
+    margin: 45px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+.intro {
+    text-align: center;
+    color: #667085;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.box {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d5dbe5;
+    border-radius: 7px;
+    background: white;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+#preview {
+    display: none;
+    max-width: 100%;
+    max-height: 350px;
+    margin: 22px auto;
+    border-radius: 8px;
+}
+
+#result {
+    display: none;
+    margin-top: 22px;
+    padding: 18px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    line-height: 1.9;
+}
+
+#download {
+    display: none;
+    text-decoration: none;
+    text-align: center;
+    background: #16a34a;
+    color: white;
+    padding: 13px;
+    border-radius: 7px;
+    margin-top: 18px;
+}
+
+#message {
+    margin-top: 15px;
+    text-align: center;
+    color: #dc2626;
+}
+
+.info {
+    background: white;
+    margin-top: 25px;
+    padding: 24px;
+    border-radius: 12px;
+    line-height: 1.8;
+}
+
+.info h2 {
+    margin-bottom: 10px;
+    font-size: 21px;
+}
+
+footer {
+    background: #172033;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 45px;
+}
+
+footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+@media(max-width:600px) {
+    h1 {
+        font-size: 26px;
+    }
+
+    .box {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">Quick Image Tools</a>
+</header>
+
+<main class="container">
+
+<h1>Free Image Compressor</h1>
+
+<p class="intro">
+Compress your images online for free.
+Reduce image file size quickly and easily.
+</p>
+
+<div class="box">
+
+<label>Select Your Image</label>
+<input type="file" id="file" accept="image/jpeg,image/png,image/webp">
+
+<img id="preview" alt="Image preview">
+
+<label>Image Quality</label>
+<select id="quality">
+<option value="0.9">High Quality</option>
+<option value="0.8" selected>Good Quality</option>
+<option value="0.6">Medium Quality</option>
+<option value="0.4">Smaller File Size</option>
+</select>
+
+<label>Output Format</label>
+<select id="format">
+<option value="image/jpeg">JPG</option>
+<option value="image/webp">WEBP</option>
+<option value="image/png">PNG</option>
+</select>
+
+<button id="compressBtn">Compress Image</button>
+
+<p id="message"></p>
+
+<div id="result">
+<p id="originalSize"></p>
+<p id="compressedSize"></p>
+<p id="saved"></p>
+</div>
+
+<a id="download" download="compressed-image.jpg">
+Download Compressed Image
+</a>
+
+</div>
+
+<section class="info">
+<h2>About Image Compressor</h2>
+
+<p>
+Quick Image Tools provides a free online image compressor.
+You can reduce the file size of your images and download
+the processed result directly to your device.
+</p>
+
+<h2>How to Compress an Image?</h2>
+
+<p>
+1. Select an image from your device.<br>
+2. Choose your preferred image quality.<br>
+3. Select an output format.<br>
+4. Press Compress Image.<br>
+5. Download your compressed image.
+</p>
+
+<h2>Is It Free?</h2>
+
+<p>
+Yes. You can use this image compressor for free.
+Image processing happens directly in your browser.
+Your selected image is not uploaded to our server.
+</p>
+</section>
+
+</main>
+
+<footer>
+<p>© 2026 Quick Image Tools. All Rights Reserved.</p>
+<p style="margin-top:10px">
+<a href="index.html">Back to Home</a>
+</p>
+</footer>
+
+<script>
+
+const fileInput = document.getElementById("file");
+const preview = document.getElementById("preview");
+const message = document.getElementById("message");
+const result = document.getElementById("result");
+const download = document.getElementById("download");
+
+let selectedImage = null;
+let originalFile = null;
+let downloadURL = null;
+
+fileInput.addEventListener("change", function() {
+
+    originalFile = this.files[0];
+
+    result.style.display = "none";
+    download.style.display = "none";
+    message.textContent = "";
+
+    if (downloadURL) {
+        URL.revokeObjectURL(downloadURL);
+        downloadURL = null;
+    }
+
+    if (!originalFile) return;
+
+    if (!originalFile.type.startsWith("image/")) {
+        message.textContent = "Please select a valid image.";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+        const img = new Image();
+
+        img.onload = function() {
+            selectedImage = img;
+            preview.src = e.target.result;
+            preview.style.display = "block";
+        };
+
+        img.onerror = function() {
+            message.textContent = "Unable to open this image.";
+        };
+
+        img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(originalFile);
+});
+
+document.getElementById("compressBtn").addEventListener("click", function() {
+
+    if (!selectedImage || !originalFile) {
+        message.textContent = "Please select an image first.";
+        return;
+    }
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = selectedImage.naturalWidth;
+    canvas.height = selectedImage.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    const format = document.getElementById("format").value;
+    const quality = Number(document.getElementById("quality").value);
+
+    if (format === "image/jpeg") {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    ctx.drawImage(selectedImage, 0, 0);
+
+    message.textContent = "Processing image...";
+
+    canvas.toBlob(function(blob) {
+
+        if (!blob) {
+            message.textContent = "Image processing failed.";
+            return;
+        }
+
+        if (downloadURL) {
+            URL.revokeObjectURL(downloadURL);
+        }
+
+        downloadURL = URL.createObjectURL(blob);
+
+        const extension = {
+            "image/jpeg": "jpg",
+            "image/png": "png",
+            "image/webp": "webp"
+        }[format];
+
+        download.href = downloadURL;
+        download.download = "compressed-image." + extension;
+
+        const originalKB = originalFile.size / 1024;
+        const compressedKB = blob.size / 1024;
+
+        const saved = originalFile.size > 0
+            ? ((originalFile.size - blob.size) / originalFile.size) * 100
+            : 0;
+
+        document.getElementById("originalSize").textContent =
+            "Original Size: " + originalKB.toFixed(2) + " KB";
+
+        document.getElementById("compressedSize").textContent =
+            "Compressed Size: " + compressedKB.toFixed(2) + " KB";
+
+        document.getElementById("saved").textContent =
+            saved >= 0
+            ? "File Size Reduced: " + saved.toFixed(2) + "%"
+            : "File Size Increased: " + Math.abs(saved).toFixed(2) + "%";
+
+        result.style.display = "block";
+        download.style.display = "block";
+
+        message.textContent = "Image processed successfully!";
+
+    }, format, quality);
+
+});
+
+</script>
+
+</body>
+  </html>
