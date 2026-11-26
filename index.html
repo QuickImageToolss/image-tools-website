@@ -377,7 +377,20 @@ and are not uploaded to our server.
 
 </section>
 
-<section class="about" id="how-it-works"><h2>How to Use Quick Image Tools</h2><p>Choose the image tool that matches your task, select an image from your device, adjust the available settings, and process it. Preview the result and download it when you are satisfied. Keep your original image as a backup.</p><h2>Image Processing and Privacy</h2><p>Our browser-based image tools process selected files locally in your browser. The image is not uploaded to our server for processing. Your browser and device may still handle ordinary technical data when loading this website.</p></section><section class="about" id="faq"><h2>Frequently Asked Questions</h2><h3>Are Quick Image Tools free?</h3><p>The tools currently available on this website are free to use.</p><h3>Do I need to install software?</h3><p>No installation is required. Open the website in a modern browser and choose a tool.</p><h3>Will image quality always stay the same?</h3><p>Not always. Compression and format conversion can affect image quality, dimensions, transparency and file size. Always review the result and keep your original file.</p><p><a href="faq.html">Read all frequently asked questions</a></p></section>\n</main>
+<section class="about" id="how-it-works"><h2>How to Use Quick Image Tools</h2><p>Choose the image tool that matches your task, select an image from your device, adjust the available settings, and process it. Preview the result and download it when you are satisfied. Keep your original image as a backup.</p><h2>Image Processing and Privacy</h2><p>Our browser-based image tools process selected files locally in your browser. The image is not uploaded to our server for processing. Your browser and device may still handle ordinary technical data when loading this website.</p></section><section class="about" id="faq"><h2>Frequently Asked Questions</h2><h3>Are Quick Image Tools free?</h3><p>The tools currently available on this website are free to use.</p><h3>Do I need to install software?</h3><p>No installation is required. Open the website in a modern browser and choose a tool.</p><h3>Will image quality always stay the same?</h3><p>Not always. Compression and format conversion can affect image quality, dimensions, transparency and file size. Always review the result and keep your original file.</p><p><a href="faq.html">Read all frequently asked questions</a></p></section>\n
+<section class="about" id="choosing-a-tool">
+<h2>Choose the right image tool</h2>
+<p>Use Image Compressor when you want to reduce the storage size of an image while keeping its pixel dimensions. Use Image Resizer when a website, document or project asks for a specific width and height. Use Image Cropper to remove unwanted edges or focus on one part of a picture.</p>
+<p>Use JPG to PNG when you need a PNG copy of a JPG file, and PNG to JPG when you need a JPG file with a solid background. Use Image Converter to choose between JPG, PNG and WEBP. The best format depends on the image and where you plan to use it.</p>
+<h2>Understand image quality and file size</h2>
+<p>A smaller file is not always a better image. Strong compression can make fine text, edges and details look softer. Changing a format can also make a file larger, and converting a JPG to PNG cannot restore details that were already lost. Compare the downloaded result with your original before using it.</p>
+<h2>Browser-based image processing</h2>
+<p>The image tools on this website use your browser to open and process the image you select. The selected image is not uploaded to our server for processing. Your device must still have enough memory to work with the image, so very large files may take longer or may not process on some phones.</p>
+<h2>Keep an original copy</h2>
+<p>These tools create a separate downloadable result and do not replace the source file on your device. Keep the original image until you have opened and checked the processed copy, including its dimensions, file format, transparency and visual quality.</p>
+</section>
+
+</main>
 
 <footer>
 
@@ -533,8 +546,8 @@ function processImage(){
         width = Number(document.getElementById("width").value);
         height = Number(document.getElementById("height").value);
 
-        if(width < 1 || height < 1){
-            message.textContent = "Enter valid dimensions.";
+        if(!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1 || width > 12000 || height > 12000){
+            message.textContent = "Enter whole-number dimensions from 1 to 12,000 pixels."
             return;
         }
 
@@ -576,8 +589,8 @@ function processImage(){
 
         let sx = Math.floor(width*x/100);
         let sy = Math.floor(height*y/100);
-        let sw = Math.floor(width*w/100);
-        let sh = Math.floor(height*h/100);
+        let sw = Math.max(1, Math.floor(width*w/100));
+        let sh = Math.max(1, Math.floor(height*h/100));
 
         canvas.width = sw;
         canvas.height = sh;
